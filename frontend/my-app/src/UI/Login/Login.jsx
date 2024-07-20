@@ -15,7 +15,6 @@ const Login = ({ onSubmit, isAuth}) => {
         if (onSubmit(data)) {
             onSubmit(data)
             reset();
-            console.log(isAuth);
         }
     };
     return (

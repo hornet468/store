@@ -6,7 +6,6 @@ import Basket from "./Basket";
 const BasketContainer = () => {
   const dispatch = useDispatch();
   const basketState = useSelector(selectBasket);
-  console.log(selectBasket);
 
   useEffect(() => {
     dispatch(getBasket());

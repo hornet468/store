@@ -14,7 +14,7 @@ const Header = () => {
     };
   
   }
-console.log(auth);
+  
   return (
     <div className="flex justify-between items-center p-6">
       <h1 className="font-bold text-3xl flex items-center">

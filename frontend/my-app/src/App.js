@@ -11,6 +11,7 @@ import LoginContainer from "./UI/Login/LoginContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuthMe } from "./BLL/slice/auth.slice";
 import { selectAuth } from "./BLL/slice/auth.slice";
+import OrderFormContainer from "./UI/OrderForm/OrderFormContainer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/basket" element={<BasketContainer />} />
         <Route path="/register" element={<RegisterContainer />} />
         <Route path="/login" element={<LoginContainer />} />
+        <Route path="/order" element={<OrderFormContainer /> }/>
       </Routes>
     </div>
   );

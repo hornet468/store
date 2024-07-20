@@ -4,6 +4,12 @@ const instance = axios.create({
   baseURL: "http://localhost:3001",
 });
 
+
+instance.interceptors.request.use( (config) => {
+  config.headers.Authorization = window.localStorage.getItem("token");
+  return config;
+});
+
 export const productsAPI = {
   async getProducts() {
     try {
@@ -12,7 +18,7 @@ export const productsAPI = {
     } catch (err) {
       console.error("Error in API response:", err);
       throw err;
-    }
+    };
   },
   async getOneProduct(id) {
     try {
@@ -20,7 +26,7 @@ export const productsAPI = {
       return response.data;
     } catch (err) {
       console.error("Error fetching product details:", err);
-    }
+    };
   },
 };
 
@@ -31,7 +37,7 @@ export const basketAPI = {
       return response.data;
     } catch (err) {
       console.error("Error fetching basket:", err);
-    }
+    };
   },
   async addProductToBasket(IdProduct, Name, Price) {
     try {
@@ -44,7 +50,7 @@ export const basketAPI = {
     } catch (err) {
       console.error("Error adding product to basket", err);
       throw err;
-    }
+    };
   },
   async deleteProductWithBasket  (IdProduct)  {
     try {
@@ -52,7 +58,7 @@ export const basketAPI = {
       return response.data;
     } catch (err) {
       
-    }
+    };
   }
 };
 
@@ -67,7 +73,7 @@ export const authAPI = {
       return response.data;
     } catch (err) {
       console.log("Failed to register", err);
-    }
+    };
   },
   async login (password, email) {
     try {
@@ -78,19 +84,28 @@ export const authAPI = {
       return response.data;
     } catch (err) {
       console.log("Failed to fetch response login data", err);
-    }
+    };
   },
   async getAuthMe ()  {
     try {
       const response = await instance.get("/me");
       return response.data;
     } catch (err) {
-      console.log("Failed to get me");
-    }
+      console.log("Failed to get me", err);
+    };
   } 
-}
+};
 
-instance.interceptors.request.use( (config) => {
-    config.headers.Authorization = window.localStorage.getItem("token");
-    return config;
-});
+export const orderAPI = {
+  async sendOrderData(Name, PhoneNumber) {
+      try {
+          const response = await instance.post("/order", {
+              Name,
+              PhoneNumber,
+          });
+          return response.data;
+      } catch (err) {
+          console.log("Failed to send order", err);
+      }
+  }
+};
